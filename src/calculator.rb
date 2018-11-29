@@ -30,6 +30,8 @@ class Calculator
     make_result
   end
 
+  private
+
   def parse_number value
     value.to_f
   end
