@@ -21,6 +21,14 @@ $ ./ruby-calculator.rb
 42.0
 ```
 
+Type `q` command to quit and `c` to clear previous results and input
+
+
+## Limitations
+
+Currently it converts all numbers to Float
+
+
 ## Testing
 
 If you are interested, how this stuff works, you can check out tests in `test/` folder and run them if needed:
