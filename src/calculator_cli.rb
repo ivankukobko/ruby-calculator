@@ -14,7 +14,6 @@ class CalculatorCli
   def main_loop
     while true do
       puts @calc.input_stack.join(', ')
-      #puts @calc.current_result
       print '> '
       @current_input = gets.chomp
       if is_command?(@current_input.downcase)

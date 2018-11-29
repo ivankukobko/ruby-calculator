@@ -1,6 +1,5 @@
 class Calculator
   attr_reader :input_stack
-  attr_reader :current_result
 
   OPERATORS = [
     '*',
@@ -14,17 +13,18 @@ class Calculator
   end
 
   def reset
-    @input_stack = []
-    @current_result = 0
+    @input_stack = [0]
   end
 
   def add value
     return unless input_valid?(value)
 
-    @input_stack << (is_operator?(value) ? value : parse_number(value))
-
-    if @input_stack.length > 2
-      @input_stack.shift unless is_operator?(value)
+    value.split(' ').each do |v|
+      val = v.chomp
+      val = (is_operator?(val) ? val : parse_number(val))
+      next if !is_operator?(val) && val === 0
+      @input_stack << val
+      @input_stack.shift if @input_stack.length > 2 && !is_operator?(val)
     end
 
     make_result
@@ -49,7 +49,7 @@ class Calculator
     operator = @input_stack.pop
     operand2 = @input_stack.pop
     operand1 = @input_stack.pop || 0
-    @current_result = operand1.send(operator, operand2)
-    @input_stack << @current_result
+    result = operand1.send(operator, operand2)
+    @input_stack << result
   end
 end
